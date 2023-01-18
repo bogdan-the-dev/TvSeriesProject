@@ -1,0 +1,63 @@
+<div class="container">
+  <section>
+    <button mat-icon-button color="primary" aria-label="Add Tv Series" routerLink="../add" >
+      <fa-icon [icon]="faPlus"></fa-icon>
+    </button>
+    <button *ngIf="showAdminButtons()" mat-icon-button color="primary" aria-label="Edit Tv Series" [disabled]="selection.selected.length === 0" (click)="onEdit()">
+      <fa-icon [icon]="faEdit"></fa-icon>
+    </button>
+    <button *ngIf="showAdminButtons()" mat-icon-button color="primary" aria-label="Delete Tv Series" [disabled]="selection.selected.length === 0" (click)="onDelete()">
+      <fa-icon [icon]="faTrash"></fa-icon>
+    </button>
+  </section>
+  <mat-divider></mat-divider>
+
+  <table mat-table [dataSource]="getDataSource()" class="mat-elevation-z8">
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue()">
+          <!--                    [indeterminate]="selection.hasValue() && !isAllSelected()">-->
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="Name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="NumberOfSeasons">
+      <th mat-header-cell *matHeaderCellDef> NumberOfSeasons </th>
+      <td mat-cell *matCellDef="let element"> {{element.NumberOfSeasons}} </td>
+    </ng-container>
+    <ng-container matColumnDef="NumberOfEpisodes">
+      <th mat-header-cell *matHeaderCellDef> NumberOfEpisodes </th>
+      <td mat-cell *matCellDef="let element"> {{element.NumberOfEpisodes}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Rating">
+      <th mat-header-cell *matHeaderCellDef> Rating </th>
+      <td mat-cell *matCellDef="let element"> {{element.Rating}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Plot">
+      <th mat-header-cell *matHeaderCellDef> Plot </th>
+      <td mat-cell *matCellDef="let element"> {{element.Plot}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Finished">
+      <th mat-header-cell *matHeaderCellDef> Finished </th>
+      <td mat-cell *matCellDef="let element">
+        <fa-icon *ngIf="element.Finished" [icon]='faTrue'></fa-icon>
+        <fa-icon *ngIf="!element.Finished" [icon]="faFalse"></fa-icon>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</div>

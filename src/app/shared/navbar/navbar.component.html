@@ -1,0 +1,19 @@
+
+  <mat-toolbar role="heading" class="flexSpaceBetween" style="background-color: rgb(225, 225, 225)">
+    <span>TV Geek Project</span>
+    <span></span>
+    <div style="color: black">
+      <ul class="nav navbar-nav navbar-right" style="display: flex; justify-content: right ">
+        <li class="dropdown" appDropdown>
+          <a style="cursor: pointer; color: black" class="dropdown-toggle" >
+            Hello, {{getLoggedInUsername()}} <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a style="cursor: pointer; color: black" (click)="authService.SignOut()">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </mat-toolbar>
+
+

@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 " style="width: 400px">
+      <h3>Thank You for Registering</h3>
+    </div>
+  </div>
+  <div class="formGroup" *ngIf="authService.userData as user">
+    <p class="text">We have sent a confirmation email to <strong>{{user.email}}</strong>.</p>
+    <p class="text">Please check your email and click on the link to verify your email address.</p>
+  </div>
+  <br>
+  <button mat-raised-button style="border-radius: 25px; width: 250px" type="button" (click)="authService.SendVerificationMail()">
+    Resend Verification Email
+  </button>
+  <hr>
+  <button mat-raised-button style="border-radius: 25px; width: 250px" routerLink="../sign-in">Go back to Sign In</button>
+</div>

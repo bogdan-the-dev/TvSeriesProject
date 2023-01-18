@@ -1,0 +1,47 @@
+<div class="card-content" style="display: flex; justify-content: center;">
+  <div class="row">
+    <div class="col-md-12 " style="width: 600px">
+      <br />
+      <div class="col-md-12 offset-md-1">
+        <h3>Sign In</h3>
+        <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="form-floating">
+              <mat-form-field appearance="fill" [style.width.px]=600>
+                <mat-label>Email</mat-label>
+                <input matInput type="email" formControlName="username" autocomplete="email">
+                <mat-error *ngIf="isValid()">
+                  <span *ngIf="isValid()">{{getErrorMessage()}}</span>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="form-floating" style="border-radius: 5px;">
+              <mat-form-field appearance="fill" [style.width.px]=600>
+                <mat-label>Password</mat-label>
+              <input matInput type="password" id="password" formControlName="password" autocomplete="password" />
+                <mat-error *ngIf="authForm.controls?.['password'].touched && authForm.controls?.['password'].invalid">
+                  <span *ngIf="authForm.controls?.['password'].errors?.['required']">This field is mandatory.</span>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <button mat-raised-button type="submit" style="border-radius: 25px; width: 600px" [disabled]="authForm.invalid"  (click)="signIn()" color="primary">Log in</button>
+          </div>
+        </form>
+        <hr>
+        <button mat-raised-button style="border-radius: 25px; width: 600px; margin-left: -12px" color="primary" (click)="authService.GoogleAuth()"><fa-icon [icon]="faGoogle"></fa-icon> | Log in with Google Account</button>
+        <hr>
+        <button mat-raised-button style="border-radius: 25px; width: 600px; margin-left: -12px" routerLink="/forgot-password">Forgot password?</button>
+        <br>
+        <br>
+        <button mat-raised-button style="border-radius: 25px; width: 600px; margin-left: -12px" routerLink="/register-user">Don't have an account? Sign Up</button>
+      </div>
+    </div>
+  </div>
+</div>
+
